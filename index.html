@@ -1,0 +1,1890 @@
+<!DOCTYPE html><html><head><title>actiongame</title><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui=1"><meta charset="UTF-8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content=""><link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="icon64.png"><link rel="apple-touch-icon" sizes="180x180" href="icon180.png"><link rel="icon" type="image/png" sizes="32x32" href="icon32.png"><link rel="icon" type="image/png" sizes="16x16" href="icon16.png"><style>html,body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  overflow:hidden;
+  font-family: Verdana;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#canvaswrapper {
+  text-align: center ;
+}
+</style><style>@font-face { font-family: "BitCell" ; src: url("fonts/BitCell.ttf") format("truetype"); }</style><script>window.fonts = ["BitCell"]</script></head><body class="noselect custom-cursor" oncontextmenu="return false;"><div id="canvaswrapper"></div><script type="text/javascript">var resources = {"images":[{"file":"ball.png","version":18,"size":163,"properties":{"frames":1,"fps":5}},{"file":"clear.png","version":12,"size":240,"properties":{"frames":1,"fps":5}},{"file":"dead.png","version":7,"size":236,"properties":{"frames":1,"fps":5}},{"file":"enemy.png","version":48,"size":287,"properties":{"frames":2,"fps":5}},{"file":"fire_enemy.png","version":76,"size":288,"properties":{"frames":2,"fps":5}},{"file":"goal.png","version":29,"size":167,"properties":{"frames":1,"fps":5}},{"file":"icon.png","version":0,"size":0,"properties":{}},{"file":"sprite.png","version":180,"size":287,"properties":{"frames":2,"fps":5}},{"file":"sprite2.png","version":13,"size":243,"properties":{"frames":1,"fps":5}},{"file":"sprite3.png","version":63,"size":323,"properties":{"frames":1,"fps":5}},{"file":"sprite4.png","version":63,"size":249,"properties":{"frames":2,"fps":5}},{"file":"sprite5.png","version":38,"size":157,"properties":{"frames":1,"fps":5}},{"file":"template_new.png","version":1,"size":14959,"properties":{}}],"assets":[],"maps":{"enemy":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"fire_enemy\",\"enemy\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","enemy_default":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"enemy\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]}","map":"{\"width\":24,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"goal\",\"template_new:8,14\",\"template_new:8,12\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","map2":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:3,0\",\"template_new:2,10\",\"template_new:8,4\",\"template_new:1,12\",\"template_new:1,11\",\"template_new:1,10\",\"template_new:2,0\",\"template_new:2,14\",\"template_new:0,8\",\"template_new:1,8\",\"template_new:2,8\",\"template_new:0,9\",\"template_new:1,9\"],\"data\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0,3,0,2,2,4,5,4,5,5,5,6,4,0,0,0,0,7,7,7,7,7,7,7,0,0,0,0,0,0,2,2,0,0,0,2,2,5,6,5,4,6,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,4,6,5,6,5,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,4,6,4,6,6,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,4,5,5,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,6,6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,8,8,8,8,8,8,8,8,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,11,12,13,6,6,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","stage1":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:0,1\",\"template_new:6,2\",\"template_new:0,0\",\"template_new:0,3\",\"template_new:3,1\",\"template_new:3,0\",\"template_new:3,6\",\"template_new:3,8\",\"template_new:2,5\",\"template_new:3,5\",\"template_new:4,5\",\"template_new:0,7\",\"template_new:1,7\",\"template_new:2,7\",\"template_new:4,9\"],\"data\":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,0,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,2,0,2,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,8,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,8,0,0,0,0,0,0,9,10,11,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,10,10,10,10,10,0,0,0,0,0,0,0,0,0,5,5,12,13,13,13,14,5,5,0,0,0,0,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,0,0,0,0,0,0,0,0,15,15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15,15,15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","stage1items":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:7,8\",\"template_new:7,7\",\"goal\",\"template_new:8,13\",\"template_new:7,13\",\"template_new:6,8\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","stage1items2":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","stage2":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:4,0\",\"template_new:4,1\",\"template_new:5,8\",\"template_new:0,8\",\"template_new:1,8\",\"template_new:2,8\",\"template_new:6,2\",\"template_new:3,8\",\"template_new:2,9\",\"template_new:4,8\",\"template_new:3,7\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,2,4,5,5,5,5,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,8,0,0,0,7,7,0,0,0,7,7,7,7,7,0,0,0,0,0,0,9,9,9,0,9,9,0,9,9,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,7,7,0,0,0,0,0,0,9,9,9,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,9,9,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","stage2items":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"goal\",\"template_new:7,8\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]}","testitems":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:6,8\",\"goal\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}","testmap":"{\"width\":32,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0,\"template_new:0,0\"],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}"},"sounds":[{"file":"dead.wav","version":1,"size":58544,"properties":{}},{"file":"fun.flac","version":1,"size":74928,"properties":{}},{"file":"jump.flac","version":1,"size":22825,"properties":{}},{"file":"pico.flac","version":1,"size":22565,"properties":{}}],"music":[]};
+var graphics = "M1";
+
+</script><script type="text/javascript">var orientation = 'any' ;
+var aspect = 'free' ;
+var ms_libs = [] ;
+window.skip_service_worker = true;
+window.exported_project = true;
+window.ms_use_server = false ;
+</script><script src="runner.js"></script><script src="microengine.js"></script></body><script type="text/javascript">//
+//
+// The game is started with the code below.
+// Once you have received the "started" signal (see below),
+// you can do the following:
+// 1) Inject functions or objects into the global context of the microStudio engine, example:
+//
+//   window.player.setGlobal("special_callback",function(x) { console.info(x) }) ;
+//   // Your microScript code can now call the "special_callback" function
+//
+// 2) Call microScript global functions from your JavaScript code, example:
+//
+//   window.player.call("call_me_from_javascript",[10,1000]) ;
+//   // arguments to the function call are provided as an array
+//
+// 3) Run a microScript code snippet from your JavaScript code, example:
+//
+//   window.player.exec("player.position_x = 50",function(result) { console.log(result) ; }) ;
+//
+
+window.addEventListener("load",function() {
+  window.player = new Player(function(event) {
+    if (event.name == "started") {
+      // signal that the game is started
+    }
+    else if (event.name == "log") {
+      // console.info(event.data) ;
+    }
+  }) ;
+  document.body.focus() ;
+}) ;
+
+</script><script id="code" type="text/x-microscript">
+
+
+class CameraNone {
+  target;
+  pos = {x: screen.width/2, y: screen.height/2};
+  constructor(target) {
+    this.target = target;
+  }
+  init() {}
+  update() {}
+  draw() {}
+}
+
+class Camera {
+  #target;
+  pos = {x: 0, y: 0};
+  constructor(target) {
+    this.#target = target;
+  }
+  init() {}
+  update() {
+    this.pos.x = this.#target.pos.x;
+    this.pos.y = this.#target.pos.y;
+  }
+  draw() {}
+}
+
+class CameraFollow {
+  #target;
+  pos = {x: 0, y: 0};
+  constructor(target) {
+    this.#target = target;
+  }
+  init() {}
+  update() {
+    this.pos.x += (this.#target.pos.x - this.pos.x) / 10;
+    this.pos.y += (this.#target.pos.y - this.pos.y) / 10;
+  }
+  draw() {}
+}
+
+
+class CameraInMap {
+  #target;
+  mapSize;
+  pos = {x: 0, y: 0};
+  minX;
+  maxX;
+  minY;
+  maxY;
+  setTerget(target) {
+    this.#target = target;
+  }
+  setMapSize(mapSize) {
+    this.mapSize = mapSize;
+    this.minX = screen.width/2;
+    this.maxX = mapSize.width - screen.width/2;
+    this.minY = screen.height/2;
+    this.maxY = mapSize.height - screen.height/2;
+    
+  }
+
+  init() {}
+  update() {
+    // 
+    this.pos.x = Math.min(Math.max(this.minX, this.#target.pos.x), this.maxX);
+    this.pos.y = Math.min(Math.max(this.minY, this.#target.pos.y), this.maxY);
+  }
+  draw() {}
+}
+// window.Camera = Camera;
+// window.Camera = CameraFollow;
+// window.Camera = CameraNone;
+window.Camera = CameraInMap;
+
+class DrawerFactory {
+  camera;
+  constructor({camera}) {
+    this.camera = camera;
+  }
+  
+  create(obj) {
+    var name = null;
+    if(typeof obj == "string") {
+      name = obj
+    } else if(typeof obj.name == "string") {
+      name = obj.name;
+    } else if(typeof obj.constructor.name == "string") {
+      name = obj.constructor.name;
+    } else {
+      throw new Error("不明");
+    }
+    
+    
+    if(window[`create${name}Drawer`]) {
+      return window[`create${name}Drawer`](this.camera)
+    }
+    if(window[`${name}Drawer`]) {
+      return new window[`${name}Drawer`](this.camera);
+    }
+    throw new Error("不明:" + name);
+    
+  }
+
+}
+
+class PlayerDrawer {
+  #camera;
+  constructor(camera) {
+    this.#camera = camera;
+  }
+  setCamera(camera) {
+    this.#camera = camera;// late init
+  }
+  draw(player) {
+    // printObj(player.pos);
+    screen.setDrawScale(player.facing, 1);
+    
+    const spriteName = this.getSpriteName(player);
+    screen.drawSprite(
+      spriteName, 
+      player.pos.x - this.#camera.pos.x, 
+      player.pos.y - this.#camera.pos.y, 
+      16, 16
+    );
+
+    screen.setDrawScale(1, 1);// reset
+    
+    if(player.isJump) {
+      audio.playSound("jump");
+    }
+  }
+  
+  getSpriteName(player) {
+    if(player.isDead) {
+      return "dead";
+    }
+    if(player.isFlying) {
+      return "sprite2";
+    }
+    if(player.vel.x != 0) {
+      return "sprite";
+    }
+    return "sprite.0"
+  }
+}
+
+class DeadPlayerDrawer {
+  isFirstDraw = true;
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(deadPlayer) {
+    if(this.isFirstDraw) {
+      audio.playSound("dead");
+      this.isFirstDraw = false;
+    }
+    screen.setDrawRotation(45);
+    screen.drawSprite(
+      "dead", 
+      deadPlayer.pos.x - this.camera.pos.x, 
+      deadPlayer.pos.y - this.camera.pos.y, 
+      32, 32
+    );
+    screen.setDrawRotation(0)
+  }
+}
+
+class ClearPlayerDrawer {
+  isFirstDraw = true;
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(clearPlayer) {
+    if(this.isFirstDraw) {
+      audio.playSound("fun");
+      this.isFirstDraw = false;
+    }
+    screen.drawSprite(
+      "clear", 
+      clearPlayer.pos.x
+        - this.camera.pos.x, 
+      clearPlayer.pos.y - this.camera.pos.y, 
+      16, 16
+    );
+  }
+}
+
+
+class BallDrawer {
+  isFirstDraw = true;
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(ball) {
+    screen.drawSprite(
+      "ball", 
+      ball.pos.x - this.camera.pos.x, 
+      ball.pos.y - this.camera.pos.y, 
+      16, 16
+    );
+    if(this.isFirstDraw) {
+      audio.playSound("jump");
+      this.isFirstDraw = false;
+    }
+  }
+}
+
+class EnemyDrawer {
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(enemy) {
+    screen.setDrawScale(enemy.facing, 1);
+    
+    const spriteName = this.getSpriteName();
+    screen.drawSprite(
+      spriteName, 
+      enemy.pos.x - this.camera.pos.x, 
+      enemy.pos.y - this.camera.pos.y, 
+      16, 16
+    );
+
+    screen.setDrawScale(1, 1);// reset
+    
+    if(enemy.isJump) {
+      audio.playSound("jump");
+    }
+  }
+  
+  getSpriteName() {
+    return "enemy"
+  }
+}
+
+class FireEnemyDrawer {
+  constructor(camera) {
+    this.camera = camera;
+  }
+  
+  draw(enemy) {
+    // printObj(enemy.pos);
+    screen.drawSprite(
+      "fire_enemy", 
+      enemy.pos.x - this.camera.pos.x, 
+      enemy.pos.y - this.camera.pos.y, 
+      16, 16
+    );
+  }
+}
+
+function createParticleDrawer(camera) {
+  return {
+    draw: (particle) => {
+      return particle.tips.forEach(v => screen.fillRect( v.x - camera.pos.x, v.y - camera.pos.y, 4, 4, particle.color))
+    }
+  }
+}
+
+class GroundDrawer {
+  #mapSize
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(ground) {
+    const map = ground.map;
+    const mapSize = {
+      width: map.width * map.block_width,
+      height: map.height * map.block_height,
+    }
+    const mapHalfSize = half(mapSize);
+    screen.drawMap(
+      ground.mapName,
+      mapHalfSize.width - this.camera.pos.x, 
+      mapHalfSize.height -this.camera.pos.y, 
+      mapSize.width,
+      mapSize.height 
+    );
+  }
+}
+
+class ItemsDrawer {
+  #lastItemCount
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(items) {
+    screen.drawMap(
+      items.map.name, 
+      items.mapHalfSize.width - this.camera.pos.x, 
+      items.mapHalfSize.height - this.camera.pos.y, 
+      items.mapSize.width, 
+      items.mapSize.height 
+    );
+    if(this.#lastItemCount !== undefined && this.#lastItemCount != items.count) {
+      audio.playSound("pico");
+    }
+    this.#lastItemCount = items.count;
+  }
+}
+
+class GoalItemDrawer {
+  constructor(camera) {
+    this.camera = camera;
+  }
+  draw(goalItem) {
+    screen.drawSprite(
+      "goal", 
+      goalItem.pos.x - this.camera.pos.x, 
+      goalItem.pos.y - this.camera.pos.y, 
+      16, 16
+    );
+  }
+}
+
+class ItemDrawer {
+  constructor(camera) {
+    const tipSize = 16;
+    this.draw = (item) => {
+      screen.drawSpritePart(
+        item.spriteValue.name, 
+        item.spriteValue.pos.x * tipSize, 
+        item.spriteValue.pos.y * tipSize,
+        tipSize, tipSize,
+        item.pos.x - camera.pos.x, 
+        item.pos.y - camera.pos.y, 
+        tipSize, tipSize
+      );
+      
+      if(item.isDead) {
+        audio.playSound("pico");
+      }
+    }
+  }
+}
+
+// window.Drawer = Drawer;
+window.DrawerFactory = DrawerFactory;
+window.PlayerDrawer = PlayerDrawer;
+window.DeadPlayerDrawer = DeadPlayerDrawer;
+window.BallDrawer = BallDrawer;
+window.ClearPlayerDrawer = ClearPlayerDrawer;
+window.EnemyDrawer = EnemyDrawer;
+window.FireEnemyDrawer = FireEnemyDrawer;
+window.GroundDrawer = GroundDrawer;
+window.ItemsDrawer = ItemsDrawer;
+window.GoalItemDrawer = GoalItemDrawer;
+window.ItemDrawer = ItemDrawer;
+
+
+// 緑色の敵
+window.Enemy = class Enemy {
+  pos;
+  vel = {x: 0, y: 0}; // 速度
+  width = 9; // 画像のサイズより少し小さい
+  height = 12;
+  halfSize;
+  facing;
+  isFlying = false;
+  isDead = false;
+  isJump = false;
+  ground;
+  #physicsOnGround;
+  constructor({initPos, drawerFactory, facing, createParticle, physicsOnGround}) {
+    this.pos = {x:initPos.x, y:initPos.y};
+    this.halfSize = half(this);
+    this.facing = facing;
+    this.#physicsOnGround = physicsOnGround;
+    
+    this.hit = hitAction({enemy:this, createParticle});
+    this.draw = () => drawerFactory.create(this).draw(this);
+  }
+  
+  setPhysicsOnGround(physicsOnGround) {
+    this.#physicsOnGround = physicsOnGround;
+  }
+  
+  update() {
+    const lastPos = {x:this.pos.x, y:this.pos.y};
+    const candidatePos = {x:this.pos.x + this.facing/2, y:this.pos.y}; // update後の位置候補
+    this.#physicsOnGround.update(this, {lastPos, candidatePos});
+    if(this.vel.x == 0) {
+      this.facing *= -1;
+    }
+  }
+  
+  getSpriteName() {
+    return "enemy"
+  }
+}
+
+// 共通処理
+function hitAction({enemy, createParticle}) {
+  return (other, otherGroupName) => {// hit()
+    if(otherGroupName == "playerBalls") {
+      enemy.isDead = true;
+      createParticle({x:enemy.pos.x, y:enemy.pos.y});
+    }
+  }
+}
+
+// 炎の敵
+class FireEnemy {
+  static halfSize = {width:8, height:8};
+  isDead = false;
+  constructor({drawer, initPos, createParticle, createFire}) {
+    this.pos = {x:initPos.x, y:initPos.y};
+    const interval300Step = new Interval(300);
+    
+    this.hit = hitAction({enemy:this, createParticle});
+    this.update = () => {
+      // 定期的に火を噴く
+      interval300Step.onTriggered(() => {
+        createFire({x:this.pos.x, y:this.pos.y - 4});
+      });
+      }
+
+      this.draw = () => drawer.draw(this);
+    }
+}
+
+// 吐く火
+class Fire {
+  constructor({player, drawer, initPos}) {
+    this.isDead = false;
+    this.pos = {x:initPos.x, y:initPos.y};
+    var vel = helper.calcDirectionVector(player.pos, this.pos);// プレイヤーの方向に飛ぶ
+    this.draw = () => drawer.draw(this);
+    this.update = () => {
+      this.pos.x += vel.x;
+      this.pos.y += vel.y;
+      if(helper.calcDistance(player.pos, this.pos) > 1000) {
+        this.isDead = true;
+      }
+    }
+  }
+  
+  static factory({player, drawerFactory, enemiesGameObject}) {
+    const drawer = drawerFactory.create(Fire);
+    return (initPos) => {
+      const fire = new Fire({player, drawer, initPos});
+      enemiesGameObject.add(fire);
+      return fire;
+    }
+  }
+}
+
+function createFireDrawer(camera) {
+  return {
+    draw:(fire) => {
+      screen.drawSprite(
+        "sprite4", 
+        fire.pos.x - camera.pos.x, 
+        fire.pos.y - camera.pos.y, 
+        16, 16
+      );
+    }
+  }
+}
+
+/**
+ * 定期的に敵を生成する
+ */
+function createEnemyFactory({player, drawerFactory, physicsOnGround, intervalCount, gameObjects, initPos, createParticle}) {
+  var step = 0;
+  if(!initPos) {
+    initPos = {x:330, y:240};
+  }
+  const interval = new Interval(intervalCount, true);
+  
+  return {
+    update: () => {
+      if(!gameObjects) {
+        return;
+      }
+      interval.onTriggered(() => {
+        const facing = player.pos.x - initPos.x < 0 ? -1 : 1;
+        const enemy = new Enemy({initPos, drawerFactory, facing, createParticle, physicsOnGround});
+        gameObjects.add(enemy);
+      });
+    },
+  };
+}
+
+class EnemyFactoryOnMap {
+  constructor({map, mapName, player, gameObjects, drawerFactory, particleFrontLayer, 
+  ground, physicsOnGround, context}) {
+    // printObj(map);
+    this.map = map;
+    this.mapName = mapName;
+    this.player = player;
+    this.gameObjects = gameObjects;
+    this.drawerFactory = drawerFactory;
+    this.particleFrontLayer = particleFrontLayer;
+    this.ground = ground;
+    this.physicsOnGround = physicsOnGround;
+    this.context = context;
+    
+    this.createParticle = Particle.factory({drawerFactory, particlesGameObject:particleFrontLayer});
+    this.createFire = Fire.factory({player, drawerFactory, enemiesGameObject:gameObjects});
+  }
+  init() {
+    if(!this.map) {
+      return;
+    }
+    const list = [];
+    this.map.map.forEach((v, i) => {
+      const x = i % this.map.width;
+      const y = Math.floor(i / this.map.width);
+      if(v) {
+        list.push({x:x*this.map.block_width, y:y*this.map.block_height, value:v})
+      }
+    })
+    printObj(list);
+    
+    list.forEach(p => {
+      if(p.value == "enemy") { // 緑
+        const enemyFactory = createEnemyFactory({
+          player:this.player, 
+          drawerFactory:this.drawerFactory, 
+          physicsOnGround: this.physicsOnGround, 
+          intervalCount:this.context.enemyIntervalCount, 
+          gameObjects: this.gameObjects,
+          createParticle: this.createParticle,
+          initPos:{x:p.x, y:p.y}
+        });
+        this.gameObjects.add(enemyFactory);
+      }
+      if(p.value == "fire_enemy") { // 火
+        const enemy = new FireEnemy({
+          drawer: this.drawerFactory.create(FireEnemy),
+          initPos: {x:p.x + FireEnemy.halfSize.width, y:p.y + FireEnemy.halfSize.height},
+          createParticle: this.createParticle,
+          createFire: this.createFire
+        });
+        this.gameObjects.add(enemy);
+      }
+    })
+  }
+}
+
+window.EnemyFactoryOnMap = EnemyFactoryOnMap;
+
+
+/**
+ * @typedef {Object} MapData
+ * @property {number} width - 幅 ブロック数
+ * @property {number} height - 高さ ブロック数
+ * @property {number} block_width - ブロックの幅
+ * @property {number} block_height - ブロックの高さ
+ * @property {Array<number|string>} sprites - スプライトの配列。インデックスまたはテンプレート名で構成される。
+ * @property {Array<number>} map - データ配列。各要素はスプライトのインデックスを表す数字。
+ */
+
+
+class Ground {
+  map;
+  #drawer;
+  mapSize
+  mapName;
+  constructor({config, drawer, map, mapName}) {
+    this.map = map;
+    this.mapName = mapName;
+    this.#drawer = drawer;
+    this.mapSize = {
+      width: this.map.width * this.map.block_width,
+      height: this.map.height * this.map.block_height,
+    }
+  }
+  init() {
+  }
+  update() {
+    // nop
+  }
+  draw() {
+    this.#drawer.draw(this);
+  }
+  
+  hitTest(pos) {
+    return helper.hitTest(pos, this.map);
+  }
+  hitTestForRect(pos, halfSize) {
+    return helper.isHitTestForRect(pos, halfSize, this.map);
+  }
+}
+
+
+
+class PhysicsOnGround {
+  config;
+  ground;
+  constructor({ground, config}) {
+    this.ground = ground;
+    this.config = config;
+  }
+  update(obj, {lastPos, candidatePos}) {
+    // print(obj.isJump)
+    // 重力
+    const acc = {x:0, y:this.config.gravity};
+    obj.vel.y = obj.isJump ? this.config.jumpSpeed : obj.vel.y + acc.y;
+    if(obj.vel.y < -this.config.maxSpeed) { // 落ちる最高速度を制限
+      obj.vel.y = -this.config.maxSpeed;
+    }
+    candidatePos.y += obj.vel.y;
+    
+  
+    // 位置の確定
+    if(!this.ground.hitTestForRect(candidatePos, obj.halfSize)) { // x, yに移動可能か？
+      obj.pos.x = candidatePos.x;
+      obj.pos.y = candidatePos.y;
+    }
+    else if(!this.ground.hitTestForRect({x:candidatePos.x, y:obj.pos.y}, obj.halfSize)) {// x方向だけならいける？
+      obj.pos.x = candidatePos.x;
+    }
+    else if(!this.ground.hitTestForRect({x:obj.pos.x, y:candidatePos.y}, obj.halfSize)) {// y方向だけならいける？
+      obj.pos.y = candidatePos.y;
+    }
+    
+    obj.vel = {x: obj.pos.x - lastPos.x, y: obj.pos.y - lastPos.y};
+    
+    if(obj.vel.x > 0) {
+      obj.facing = 1;
+    } else if(obj.vel.x < 0) {
+      obj.facing = -1;
+    }
+    
+    obj.isFlying = obj.vel.y > 0;
+    
+    if(obj.pos.y < -200) { // 画面外に出たら死ぬ
+      obj.isDead = true;
+    }
+    return obj;
+  }
+  
+  isOnGround(obj) {
+    const foot = {x:obj.pos.x, y:obj.pos.y - obj.halfSize.height - 1};
+    return this.ground.hitTest({x:foot.x + obj.halfSize.width, y:foot.y}) || this.ground.hitTest({x:foot.x - obj.halfSize.width, y:foot.y});
+  };
+}
+
+window.Ground = Ground;
+window.PhysicsOnGround = PhysicsOnGround;
+
+
+function hitTest(pos, map) {
+  const {x, y} = getIndexPos(pos, map);
+  const result = map.get(x, y); // microStudio依存
+  return result;
+}
+
+function getIndexPos({x, y}, map) {
+  return {
+    x: Math.floor(x / map.block_width),
+    y: Math.floor(y / map.block_height),
+  }
+}
+
+function hitTestForRect(pos, halfSize, map) {
+  const list = corners(pos, halfSize).filter(p => hitTest(p, map)).map(p => getIndexPos(p, map)).map(p => JSON.stringify(p));
+  const uniquedList = new Set(list);
+  if(uniquedList.size == 0) {
+    return null;
+  }
+  return Array.from(uniquedList.values()).map(k => JSON.parse(k));
+}
+
+function hitTestDistance(rect1, rect2, distance) {
+  return Math.pow(rect1.pos.x - rect2.pos.x, 2) + Math.pow(rect1.pos.y - rect2.pos.y, 2) < distance * distance;
+}
+
+function calcDistance(pos1, pos2) {
+  return Math.sqrt(Math.pow(pos1.x - pos2.x, 2) + Math.pow(pos1.y - pos2.y, 2))
+}
+
+function calcDirectionVector(toPos, fromPos) {
+  const d = calcDistance(toPos, fromPos);
+  return {
+    x: (toPos.x - fromPos.x) / d,
+    y: (toPos.y - fromPos.y) / d,
+  }
+}
+
+function isHitTestForRect(pos, halfSize, map) {
+  const list = corners(pos, halfSize).filter(p => hitTest(p, map)).map(p => getIndexPos(p, map))
+  return list.length > 0;
+}
+
+function half({width, height}) {
+  return {width: width / 2, height: height/2};
+}
+
+function calcPos(to, from) {
+  return {x: to.x - from.x, y: to.y - from.y};
+}
+
+/**
+ * 矩形の四隅の位置を取得する
+ */
+function corners(pos, halfSize) {
+  return [
+    {x: pos.x - halfSize.width, y: pos.y - halfSize.height},
+    {x: pos.x + halfSize.width, y: pos.y - halfSize.height},
+    {x: pos.x - halfSize.width, y: pos.y + halfSize.height},
+    {x: pos.x + halfSize.width, y: pos.y + halfSize.height},
+  ]
+}
+
+window.Interval = class Interval {
+  count = 1;
+  isTriggered = false;
+  constructor(intervalCount, zeroMode) {
+    this.intervalCount = intervalCount;
+    if(zeroMode) {
+      this.count = 0;
+    }
+  }
+  update(triggerAction) {
+    if(this.count == 0) {
+      this.isTriggered = true;
+      if(triggerAction) {
+        triggerAction();
+      }
+    } else {
+      this.isTriggered = false;
+    }
+    this.count = (this.count + 1) % this.intervalCount;
+  }
+  onTriggered(triggerAction) {
+    this.update(triggerAction);
+  }
+}
+
+function printObj(obj) {
+  print(JSON.stringify(obj))
+}
+
+class GameObjects {
+  children = new Set();
+  isInitCalled = false;
+  constructor(options) {
+    this.children = new Set();
+    this.name = options?.name;
+  }
+
+  add(child) {
+    this.children.add(child);
+    if(this.isInitCalled && child.init) {
+      child.init();
+    }
+  }
+  remove(child) {
+    this.children.delete(child);
+    if(child.destroy) {
+      child.destroy();
+    }
+  }
+  removeAll() {
+    [...this.children.values()].filter(v => v.destroy).forEach(v => v.destroy());
+    this.children = new Set();// 削除
+  }
+  forEach(cb) {
+    this.children.forEach(cb);
+  }
+  get length() {
+    return this.children.size;
+  }
+  get isEmpty() {
+    return this.length == 0;
+  }
+  init() {
+    if(this.isInitCalled) {
+      return;
+    }
+    this.isInitCalled = true;
+    [...this.children.values()].filter(v => v.init).forEach(v => v.init());
+  }
+  update() {
+    [...this.children.values()].filter(v => v.update).forEach(v => v.update());
+  }
+  draw() {
+    [...this.children.values()].filter(v => v.draw).reverse().forEach(v => v.draw());
+  }
+  
+  afterDraw() {
+    [...this.children.values()].filter(v => v.update).forEach(v => {
+      if(v.isDead) {// 死んでたら削除
+        this.remove(v);
+      }
+    });
+  }
+  
+  destroy() {
+    this.children.forEach(v => this.remove(v));
+  }
+}
+
+class SingleEvents {
+  events = {};
+  notify(event, options) {
+    this.events[event] = {event, options, isDoneOnUpdate:false, isDoneOnDraw:false}
+  }
+  doneOnUpdate(event) {
+    this.events[event].isDoneOnUpdate = true;
+    this.refresh(event);
+  }
+  doneOnDraw(event) {
+    this.events[event].isDoneOnDraw = true;
+    this.refresh(event);
+  }
+  refresh(event) {
+    if(this.events[event].isDoneOnUpdate && this.events[event].isDoneOnDraw) {
+      delete this.events[event];
+    }
+  }
+}
+
+class DebugDisplay {
+  fontSize = 12;
+  index = 0;
+  count = 0;
+  fonts = "AESystematic, Alkhemikal, AlphaBeta, Arpegius, Awesome, BitCell, Blocktopia, Comicoro, Commodore64, DigitalDisco, Edunline, EnchantedSword, EnterCommand, Euxoi, FixedBold, GenericMobileSystem, GrapeSoda, JupiterCrash, Kapel, KiwiSoda, Litebulb8bit, LycheeSoda, MisterPixel, ModernDos, NokiaCellPhone, PearSoda, PixAntiqua, PixChicago, PixelArial, PixelOperator, Pixellari, Pixolde, PlanetaryContact, PressStart2P, RainyHearts, RetroGaming, Revolute, Romulus, Scriptorium, Squarewave, Thixel, Unbalanced, UpheavalPro, VeniceClassic, ZXSpectrum, Zepto".split(",").map(v => v.trim());
+  setOutputFunction(func) {
+    this.func = func;
+    return this;
+  }
+  constructor(func) {
+    this.func = func;
+  }
+  init() {}
+  update() {}
+  draw() {
+    if(!this.func) {
+      return;
+    }
+    this.count++;
+    if(this.count == 100) {
+      this.count = 0;
+      this.index = (this.index + 1) % fonts.length;
+    }
+    const obj = this.func();
+    screen.setDrawAnchor(-1,1);
+    screen.setFont("BitCell");
+    const lines = Object.keys(obj)
+      .map(k => `${k}:${JSON.stringify(obj[k])}`)
+      .forEach((t, i) => {
+        screen.drawTextOutline(t,-screen.width/2, -this.fontSize*i + screen.height/2,this.fontSize, "#000")
+        screen.drawText(t,-screen.width/2, -this.fontSize*i + screen.height/2,this.fontSize, "#FFF")
+        
+      })
+    screen.setDrawAnchor(0,0);
+  }
+}
+
+class ChangeEventChecker {
+  add(name, checkerFunc) {
+    this[name] = {checkerFunc, lastValue:undefined, isChanged:false};
+    return this;
+  }
+
+  check() {
+    Object.entries(this).forEach((e) => {
+      const [k, v] = e;
+      const value = v.checkerFunc();
+      if(v.lastValue !== undefined) {
+        v.isChanged = v.lastValue != value;
+      }
+      v.lastValue = value;
+    })
+  }
+}
+class GamePad {
+  UP = false;
+  DOWN = false;
+  RIGHT = false;
+  LEFT = false;
+  A = false;
+  B = false;
+  press = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+    A: false,
+    B: false,
+  };
+  release = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+    A: false,
+    B: false,
+  }
+  addOtherPad(other) {
+    this.other = other;
+  }
+  update() {
+    const arrowKeys = ["UP", "DOWN", "RIGHT", "LEFT", "A", "B"];
+    const keyboardMap = {
+      UP: ["ARROW_UP", "E"],
+      DOWN: ["ARROW_DOWN", "D"],
+      LEFT: ["ARROW_LEFT", "S"],
+      RIGHT: ["ARROW_RIGHT", "F"],
+      A: ["SPACE", "K", "A"],
+      B: ["ENTER", "J", "B"],
+    }
+    
+    arrowKeys.forEach(k => {
+      this[k] = gamepad[k] || keyboardMap[k].some(v => keyboard[v]) || (this.other && this.other[k])
+      this.press[k] = gamepad.press[k] || keyboardMap[k].some(v => keyboard.press[v]) || (this.other && this.other.press[k])
+      this.release[k] = gamepad.release[k] || keyboardMap[k].some(v => keyboard.release[v]) || (this.other && this.other.release[k])
+    })
+  }
+}
+
+function isPointInRect(pos, rect) {
+  // 矩形の左上、右下、左下の座標を計算（中心位置から計算）
+  const rectLeft = rect.pos.x - rect.width / 2;
+  const rectTop = rect.pos.y - rect.height / 2;
+  const rectRight = rect.pos.x + rect.width / 2;
+  const rectBottom = rect.pos.y + rect.height / 2;
+
+  // 点の座標が矩形の範囲内にあるかを判定
+  return pos.x >= rectLeft && pos.x <= rectRight &&
+         pos.y >= rectTop && pos.y <= rectBottom;
+}
+
+class ScreenGamePad {
+  buttons = [];
+  arrowCenter;
+  arrowRadius = 32;
+  UP = false;
+  DOWN = false;
+  RIGHT = false;
+  LEFT = false;
+  A = false;
+  B = false;
+  press = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+    A: false,
+    B: false,
+  };
+  release = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+    A: false,
+    B: false,
+  }
+  init() {
+    const marginBottom = 6;
+    const marginLeft = 6;
+    const width = 36;
+    const height = 24;
+    // const width2 = height;
+    // const height2 = width;
+    const halfWidth = width / 2;
+    const halfHeight= height / 2;
+    // const halfWidth2 = width2 / 2;
+    // const halfHeight2= height2 / 2;
+    // const downY = -screen.height/2 + marginBottom + halfHeight2;
+    this.arrowCenter = {
+      x: -screen.width/2 + this.arrowRadius + marginLeft,
+      y: -screen.height/2 + this.arrowRadius + marginBottom,
+    }
+    
+    // const left  = {name:"LEFT" , pos:{x:-screen.width/2+marginLeft+halfWidth, y:downY+halfHeight2}, width, height};
+    // const right = {name:"RIGHT", pos:{x:left.pos.x + width, y:left.pos.y}, width, height};
+    // const down = {name:"DOWN"  , pos:{x:left.pos.x + halfWidth, y:downY}, width:width2, height:height2};
+    // const up = {name:"UP", pos:{x:down.pos.x, y:down.pos.y + height2}, width:width2, height:height2};
+    
+    const a = {name:"A", pos:{x:screen.width/2-marginLeft-halfWidth, y:this.arrowCenter.y}, width, height};
+    const b = {name:"B", pos:{x:a.pos.x - width, y:a.pos.y}, width, height};
+    
+    this.buttons = [/*left, right, down, up,*/ a, b];
+    
+
+  }
+  update() {
+    var current = {
+      UP: false,
+      DOWN: false,
+      RIGHT: false,
+      LEFT: false,
+      A: false,
+      B: false,
+    };
+    const arrowTouches = touch.touches
+      .map(t => ({x:t.x - this.arrowCenter.x, y: t.y - this.arrowCenter.y}))
+      .map(t => ({x:t.x, y:t.y, distance:Math.sqrt(t.x*t.x + t.y*t.y)}))
+      .filter(t => t.distance <= this.arrowRadius);
+    if(arrowTouches.length > 0) {
+      const pos = arrowTouches[0];
+      const rad = Math.atan2(pos.y, pos.x);
+      const unit = Math.PI / 8;
+      if(-unit * 3 <= rad && rad < unit * 3) {
+        current.RIGHT = true;
+      }
+      if(-unit * 7 <= rad && rad < -unit * 1) {
+        current.DOWN = true;
+      }
+      if(unit * 1 <= rad && rad < unit * 7) {
+        current.UP = true;
+      }
+      if(rad <= -unit * 5 || unit * 5 < rad) {
+        current.LEFT = true;
+      }
+    }
+    
+    touch.touches.forEach(t => {
+      this.buttons.forEach(b => {
+        if(isPointInRect(t, b)) {
+          current[b.name] = true;
+        }
+      })
+    });
+    ["UP", "DOWN", "LEFT", "RIGHT", "A", "B"].forEach(key => {
+      this.release[key] = this[key] && !current[key];
+      this.press[key] = !this[key] && current[key];
+      this[key] = current[key];
+    })
+    
+    
+    // printObj(this.press.LEFT);
+    // if(touch.touches.length > 0) {
+  }
+  draw() {
+    screen.setLineWidth(2)
+    screen.drawArc(
+      this.arrowCenter.x, this.arrowCenter.y, 
+      this.arrowRadius, 0, Math.PI * 2, 0, "#FFF");
+    
+    this.buttons.forEach(b => {
+        
+        screen.drawTextOutline(b.name[0],b.pos.x,b.pos.y,30,'black')
+        screen.drawText(b.name[0],b.pos.x,b.pos.y,30,'white')
+        screen.drawRect( b.pos.x, b.pos.y, b.width, b.height ,"#FFF" )
+      })
+      
+    
+  }
+}
+
+function parseSpriteValue(text) {
+  const [name, p] = text.split(":");
+  const [x, y] = p.split(",").map(v => parseInt(v.trim()));
+  return {name, pos:{x, y}};
+}
+
+function checkCollision(gameObjects1, gameObjects2, checkCb) {
+  gameObjects1.forEach(obj1 => {
+    if(obj1.isDead) {
+      return;
+    }
+    gameObjects2.forEach(obj2 => {
+      if(obj2.isDead) {
+        return;
+      }
+      checkCb(obj1, obj2);
+    })
+  })
+}
+
+function checkCollisionByDistance(gameObjects1, gameObjects2, distance) {
+  
+  const checkCb = (obj1, obj2) => {
+    if(!obj1.pos || !obj2.pos) {
+      return;
+    }
+    if(hitTestDistance(obj1, obj2, distance)) {
+      if(obj1.hit) {
+        obj1.hit(obj2, gameObjects2.name);
+      }
+      if(obj2.hit) {
+        obj2.hit(obj1, gameObjects1.name);
+      }
+    }
+  }
+  checkCollision(gameObjects1, gameObjects2, checkCb);
+}
+
+window.GameObjects = GameObjects;
+window.SingleEvents = SingleEvents;
+window.DebugDisplay = DebugDisplay;
+window.ChangeEventChecker = ChangeEventChecker;
+window.GamePad = GamePad;
+window.ScreenGamePad = ScreenGamePad;
+window.helper = {hitTest, getIndexPos, hitTestForRect, hitTestDistance, isHitTestForRect, half, corners, calcPos, calcDistance, calcDirectionVector}
+
+
+
+
+
+
+
+class Item {
+  type = "item";
+  isDead = false;
+  constructor({pos, value, drawer}) {
+    this.pos = pos;
+    this.value = value;
+    this.spriteValue = parseSpriteValue(value);
+    // this.init = () => {};
+    this.hit = (other) => this.isDead = true
+    this.update = () => {};
+    this.draw = () => drawer.draw(this);
+  }
+}
+
+function Items({itemMapName, drawerFactory, gameObjectGroups, onClear}) {
+  const map = maps[itemMapName].clone();
+  map.name = "hoge"; // 適当に入れておく
+  maps[map.name] = map;
+  
+  const goal = Items.createGoal({map, drawerFactory, onClear});
+  const items = Items.createItems({map, drawerFactory});
+  items.forEach(v => gameObjectGroups.items.add(v));
+  const isClear = () => this.goal && this.goal.isGoal;
+  
+  this.goal = goal;
+  this.isAllGet = () => items.every(i => i.isDead);
+  this.update = () => {
+    if(this.isAllGet()) {
+      gameObjectGroups.items.add(goal);
+    }
+  };
+  // this.update = () => Items.collision(gameObjectGroups);
+}
+
+Items.createGoal = ({map, drawerFactory, onClear}) => {
+  const i = map.map.findIndex(v => v == "goal");
+  const x = i % map.width;
+  const y = Math.floor(i / map.width);
+  map.set(x, y, null);
+  
+  const goal = new GoalItem({
+    initPos:{x:map.block_width * x + map.block_width/2, y:map.block_height * y + map.block_height/2},
+    drawer:drawerFactory.create(GoalItem),
+    onClear
+  })
+  return goal;
+}
+Items.createItems = ({map, drawerFactory}) => {
+  return map.map.map((value, i) => {
+    if(!value || value == "goal") {
+      return;
+    }
+    const x = (i % map.width) * map.block_width + map.block_width / 2;
+    const y = Math.floor(i / map.width) * map.block_height + map.block_height / 2;
+    return new Item({pos:{x,y}, value, drawer:drawerFactory.create(Item)})
+  }).filter(v => v);
+}
+
+Items.collision = (gameObjectGroups) => {
+  if(gameObjectGroups.players.isEmpty) {
+    return;
+  }
+  const player = [...gameObjectGroups.players.children.values()][0];
+  gameObjectGroups.items.forEach(item => {
+    gameObjectGroups.players.forEach(player => {
+      if(hitTestDistance(item, player, 8)) {
+        item.hit(player);
+      }
+    })
+  })
+}
+
+class GoalItem {
+  type = "item-goal";
+  pos;
+  #drawer;
+  isGoal = false;
+  isDead = false
+  constructor({initPos, drawer, onClear}) {
+    this.#drawer = drawer;
+    this.pos = {x:initPos.x, y:initPos.y};
+    this.onClear = onClear;
+  }
+  hit(other) {
+    this.isGoal = true;
+    this.isDead = true;
+    if(this.onClear) {
+      this.onClear();
+    }
+  }
+  init() {}
+  update() {}
+  draw() {
+    this.#drawer.draw(this);
+  }
+}
+
+// window.Items = Items;
+window.GoalItem = GoalItem;
+window.Items = Items;
+
+
+const config = {
+  jumpSpeed: 4,
+  maxSpeed: 4,
+  gravity: -0.2,
+  mapName: "stage2",
+  itemMapName: "stage2items",
+  stages: [
+    {mapName:"testmap", itemMapName:"testitems", enemyMapName: "enemy_default"},
+    {mapName:"stage1", itemMapName:"stage1items", enemyMapName: "enemy_default"},
+    {mapName:"stage2", itemMapName:"stage2items", enemyMapName: "enemy_default"},
+    {mapName:"map2", itemMapName:"map", enemyMapName: "enemy"},
+  ],
+  // mapName: "testmap",
+  // itemMapName: "testitems",
+  initPos: {x: 10, y: 60},
+  // flymode: true
+  playBGM: false,
+  enemyIntervalCount: 300, // 敵の生成頻度
+}
+
+const context = {
+  worldCount: 0,
+  stageCount: -1,
+  maxStageCount: config.stages.length,
+  enemyIntervalCount: 300, // 敵の生成頻度
+  sceenState: "title", // title, stage-title, stage, ending
+};
+
+var gameObject;
+// var stageCount = 0;
+var debugDisplay;
+var myGamePad;
+var screenGamepad;
+var sceenState;
+init = function() {
+  print(system.inputs.touch)
+  myGamePad = new GamePad();
+  if(system.inputs.touch) {// タッチスクリーンの場合は、スクリーンゲームパッドを表示する
+    screenGamepad = new ScreenGamePad();
+    screenGamepad.init();
+    myGamePad.addOtherPad(screenGamepad);
+  }
+  const setupActionGameObject = () => {
+    print("setupActionGameObject");
+    gameObject.destroy();
+    gameObject = new ActionGameObject({config, stageCount:context.stageCount, context, myGamePad});
+    gameObject.init();
+  }
+  const callbacks = {
+    onTitle:() => {
+      gameObject = new Title();
+      gameObject.init();
+    },
+    onStageTitle:() => {
+      nextStage(context);
+      gameObject = new StageTitle({context});
+      gameObject.init();
+      // setupActionGameObject();
+    },
+    onStage:() => setupActionGameObject(),
+    onEnding: () => {
+      gameObject = new Ending();
+      gameObject.init();
+    },
+    onRestartStage: () => setupActionGameObject()
+  }
+  sceenState = new SceenState({context, callbacks});
+  sceenState.next();
+  // gameObject = new ActionGameObject({config, stageCount:context.stageCount, context, myGamePad});
+  // gameObject.init();
+  
+  debugDisplay = new DebugDisplay(() => {
+    return {
+      stage: context.stageCount
+    }
+  });
+}
+
+function nextStage(context) {
+  // system.say("before:"+context.stageCount)
+  context.stageCount++;
+  // system.say("nextStage:"+context.stageCount)
+  if(context.stageCount >= config.stages.length) { // 全ステージクリアしたらワールドを上げる。難易度上げる。
+    context.worldCount++;
+    context.stageCount = 0;
+    context.enemyIntervalCount /= 2;
+  }
+  // system.say("after:"+context.stageCount)
+}
+
+update = function() {
+  screenGamepad?.update();
+  gameObject.update();
+  if(gameObject.isGoal) {
+    sceenState.next();
+    return;
+  }
+  if(gameObject.isDead) {
+    sceenState.restartStage();
+    return;
+  }
+  debugDisplay.update();
+}
+
+draw = function() {
+  screen.clear();
+  gameObject.draw();
+  screenGamepad?.draw();
+  if(gameObject.afterDraw) {
+    gameObject.afterDraw();
+  }
+  // debugDisplay.draw();
+}
+
+
+class ActionGameObject /*extends GameObjects*/ {
+    player;
+    items;
+    ground;
+    enemy;
+    physicsOnGround;// not gameObject
+    config;
+    isDead = false;
+    bgmPlayer;
+    waitCountAfterDead = 100;
+    singleEvents;
+    
+    // particleFrontLayer;
+    stageCount;
+    isGoal;
+    wait = new Wait();
+    
+    // children;
+    myGamePad;
+    // drawer;
+    drawerFactory;
+    constructor({config, myGamePad, stageCount, context}) {
+      this.config = config;
+      this.stageCount = stageCount;
+      this.context = context;
+      this.myGamePad = myGamePad;
+      
+      this.gameObjectGroups = {
+        logic      : new GameObjects({name:"logic"}),
+        particles  : new GameObjects({name:"particles"}),
+        players    : new GameObjects({name:"players"}),
+        playerBalls: new GameObjects({name:"playerBalls"}),
+        enemies    : new GameObjects({name:"enemies"}),
+        items      : new GameObjects({name:"items"}),
+        grounds    : new GameObjects({name:"grounds"}),
+      }
+    }
+    
+    forEachGameObjects(cb) {
+      Object.values(this.gameObjectGroups).forEach(cb);
+    }
+    forEachReversedGameObjects(cb) {
+      [...Object.values(this.gameObjectGroups)].reverse().forEach(cb);
+    }
+    
+    init() {
+      const gameObjectGroups = this.gameObjectGroups;
+      const config = this.config;
+      const camera = new Camera();
+      const drawerFactory = new DrawerFactory({camera})
+      
+      const mapName = config.stages[this.stageCount].mapName;
+      const map = maps[config.stages[this.stageCount].mapName];
+      const ground = new Ground({config, drawer:drawerFactory.create(Ground.name), map, mapName});
+      const physicsOnGround = new PhysicsOnGround({config, ground});
+      const player = new Player({
+        initPos:config.initPos, 
+        myGamePad:this.myGamePad, 
+        gameObjectGroups, 
+        drawerFactory, 
+        physicsOnGround,
+        onDead: () => this.onDead()
+      });
+      camera.setTerget(player);
+      if(camera.setMapSize) {
+        camera.setMapSize(ground.mapSize);
+      }
+      const items = new Items({
+        itemMapName:config.stages[this.stageCount].itemMapName, 
+        drawerFactory, 
+        gameObjectGroups,
+        onClear: () => this.onClear()
+      });
+
+      const enemyFactoryOnMap = new EnemyFactoryOnMap({
+        map:maps[config.stages[this.stageCount].enemyMapName], 
+        mapName:config.stages[this.stageCount].enemyMapName, 
+        player, 
+        gameObjects:gameObjectGroups.enemies, 
+        drawerFactory, 
+        particleFrontLayer:gameObjectGroups.particles,
+        ground, 
+        physicsOnGround, 
+        context:this.context
+      });
+      this.player = player;
+      this.items = items;
+      this.ground = ground;
+      this.physicsOnGround = physicsOnGround;
+      this.drawerFactory = drawerFactory;
+      
+      gameObjectGroups.logic.add(this.myGamePad);
+      gameObjectGroups.logic.add(enemyFactoryOnMap);
+      gameObjectGroups.logic.add(this.context);
+      gameObjectGroups.logic.add(camera);
+      gameObjectGroups.logic.add(items);
+      gameObjectGroups.logic.add(this.wait);
+      gameObjectGroups.players.add(player);
+      gameObjectGroups.grounds.add(ground);
+      
+
+      this.bgmPlayer = new BGMPlayer(config);
+      this.bgmPlayer.play();
+      
+      this.forEachGameObjects(v => v.init())
+    }
+    
+    onDead() {
+      const deadPlayer = DeadPlayer.create({pos:this.player.pos, drawerFactory:this.drawerFactory});
+      this.gameObjectGroups.particles.add(deadPlayer);
+      this.bgmPlayer.stop();
+      this.wait.wait(this.waitCountAfterDead, () => this.isDead = true)
+    }
+    
+    onClear() {
+      const clearPlayer = new ClearPlayer({pos:this.player.pos, drawerFactory:this.drawerFactory, particleFrontLayer:this.gameObjectGroups.particles});
+      this.gameObjectGroups.particles.add(clearPlayer);
+      this.bgmPlayer.stop();
+      this.gameObjectGroups.players.removeAll();
+      this.wait.wait(this.waitCountAfterDead, () => {
+        this.isDead = true;
+        this.isGoal = true;
+      })
+    }
+    
+    update() {
+      // プレイヤーと敵の衝突
+      checkCollisionByDistance(
+        this.gameObjectGroups.players, 
+        this.gameObjectGroups.enemies,
+        10
+      );
+      // プレイヤーとアイテムの衝突
+      checkCollisionByDistance(
+        this.gameObjectGroups.players, 
+        this.gameObjectGroups.items,
+        8
+      );
+      // 玉と敵の衝突
+      checkCollisionByDistance(
+        this.gameObjectGroups.playerBalls, 
+        this.gameObjectGroups.enemies,
+        8
+      );
+      this.forEachGameObjects(v => v.update())
+
+    }
+    
+    draw() {
+      // this.children.draw();
+      this.forEachReversedGameObjects(v => v.draw())
+    }
+    
+    afterDraw() {
+      this.forEachReversedGameObjects(v => v.afterDraw())
+    }
+    
+    destroy() {
+      // this.children.destroy();
+      this.forEachGameObjects(v => v.destroy())
+      print("destroy");
+    }
+  }
+  window.ActionGameObject = ActionGameObject;
+
+
+class ContextDrawer {
+  constructor(context) {
+    this.context = context;
+  }
+  init() {}
+  update() {}
+  draw() {
+    const c = this.context;
+    screen.setDrawAnchor(-1,1);
+    screen.drawText(`${c.worldCount + 1}-${c.stageCount + 1}`,4 - screen.width/2,screen.height/2,20, "#FFF");
+    screen.setDrawAnchor(0,0)
+  }
+}
+
+class BGMPlayer {
+  constructor(config) {
+    var bgm;
+    
+    this.play = () => {
+      if(!config.playBGM) {
+        return;
+      }
+      bgm = audio.playMusic("bgm", 0.3, 1);
+    }
+    this.stop = () => {
+      if(!config.playBGM) {
+        return;
+      }
+      bgm.stop();
+      bgm.setPosition(0);
+    }
+  }
+}
+
+class Wait {
+  waitList = [];
+  wait(waitCount, cb) {
+    this.waitList.push({waitCount, cb});
+  }
+  update() {
+    this.waitList = this.waitList
+      .map(v => {
+        v.waitCount--;
+        if(v.waitCount < 0) {
+          v.cb();
+          return null;
+        }
+        return v;
+      })
+      .filter(v => v);
+  }
+}
+
+class SceenState {
+  constructor({context, callbacks}) {
+    var state = null;// // Title, StageTitle, Stage, Ending
+    
+    this.next = () => {
+      if(!state) {
+        state = "Title"
+      } else if(state == "Title") {
+        state = "StageTitle"
+      } else if(state == "StageTitle") {
+        state = "Stage"
+      } else if(state == "Stage") {
+        if(context.worldCount == 0 && context.stageCount == context.maxStageCount - 1) {
+          state = "Ending"
+        } else {
+          state = "StageTitle"
+        }
+      } else if(state == "Ending") {
+        state = "StageTitle"
+      }
+      print(state);
+      if(callbacks[`on${state}`]) {
+        callbacks[`on${state}`]();
+      }
+    }
+    
+    this.restartStage = () => {
+      print("restartStage")
+      if(callbacks.onRestartStage) {
+        callbacks.onRestartStage();
+      }
+    }
+  }
+}
+
+
+class Particle {
+  constructor({drawer, initPos, color}) {
+    var step = 0;
+    
+    this.tips = Particle.#createParticleTips({initPos, color});
+    this.color = color || "#093";
+    this.isDead = false;
+    
+    // methods
+    this.update = () => {
+      this.tips = this.tips.map(p => {
+        p.vx += p.ax;
+        p.vy += p.ay;
+        p.x += p.vx;
+        p.y += p.vy;
+        return p;
+      })
+      step++;
+      if(step > 100) {
+        this.isDead = true;
+      }
+    };
+    this.draw = () => drawer.draw(this);
+  }
+  
+  static factory({drawerFactory, particlesGameObject}) {
+    const drawer = drawerFactory.create(Particle);
+    return (initPos) => {
+      const particle = new Particle({drawer, initPos});
+      particlesGameObject.add(particle);
+      return particle;
+    }
+  }
+  static #createParticleTips({initPos, color}) {
+    const maxCount = 10;
+    return new Array(maxCount).fill(1).map((p, i) => ({x:initPos.x, y:initPos.y, vx: (i - 5) / 5, vy: Math.random() + 0.5, ax: 0, ay: -0.1}));
+  }
+}
+
+
+window.Particle = Particle;
+
+class Player {
+  pos;
+  vel = {x: 0, y: 0}; // 速度
+  width = 9; // 画像のサイズより少し小さい
+  height = 12;
+  halfSize;
+  facing = 1;
+  isFlying = false;
+  #isDead = false;
+  get isDead() { return this.#isDead }
+  set isDead(bool) {
+    this.#isDead = bool;
+    if(this.#isDead && this.onDead) {
+      this.onDead();
+    }
+  }
+  isJump = false;
+  #physicsOnGround;
+  #ball;
+  get ball() { return this.#ball }
+  
+  #drawerFactory;
+  #myGamePad;
+  #gameObjectGroups
+  constructor({initPos, myGamePad, gameObjectGroups, drawerFactory, physicsOnGround, onDead}) {
+    
+    this.pos = {x:initPos.x, y:initPos.y};
+    this.halfSize = half(this);
+    this.#myGamePad = myGamePad;
+    this.#gameObjectGroups = gameObjectGroups;
+    this.onDead = onDead;
+    
+    this.#drawerFactory = drawerFactory;
+    this.#physicsOnGround = physicsOnGround;
+    
+    const drawer = this.#drawerFactory.create(this);
+    this.draw = () => drawer.draw(this);
+    this.hit = (other, otherGroupName) => {
+      if(otherGroupName == "enemies") {
+        this.isDead = true;
+      }
+    }
+  }
+  
+  init() {
+  }
+  
+  update() {
+    const lastPos   = {x:this.pos.x, y:this.pos.y};
+    const candidatePos = {x:this.pos.x, y:this.pos.y}; // update後の位置候補
+    var isJump = false;
+    const isOnGround = () => this.#physicsOnGround.isOnGround(this);
+
+    // キー操作
+    if(this.#myGamePad.LEFT) { // 左
+      candidatePos.x--;
+    } else if(this.#myGamePad.RIGHT) { // 右
+      candidatePos.x++;
+    }
+    if((this.#myGamePad.press.UP || this.#myGamePad.press.A) && isOnGround()) { // ジャンプ
+      isJump = true;
+    }
+    if(!this.#ball && (this.#myGamePad.press.DOWN || this.#myGamePad.press.B)) { // 攻撃
+      this.#ball = Ball.create({initPos:this.pos, isRightDirection:this.facing > 0, drawerFactory:this.#drawerFactory});
+      this.#gameObjectGroups.playerBalls.add(this.#ball);
+    }
+    this.isJump = isJump;
+    this.#physicsOnGround.update(this, {lastPos, candidatePos});
+    
+    if(this.#ball) { // ボールが１つしか出ないように制御
+      if(this.#ball.isDead) {
+        this.#ball = null;
+      }
+    }
+  }
+  
+  destroy() {
+    // 相互参照でメモリに残ると嫌なので念のため削除
+    this.#physicsOnGround = null;
+  }
+}
+
+class DeadPlayer {
+  pos;
+  constructor({pos, drawer}) {
+    this.pos = pos;
+    this.draw = () => drawer.draw(this);
+  }
+  static create({pos, drawerFactory}) {
+    return new DeadPlayer({pos, drawer:drawerFactory.create(DeadPlayer)});
+  }
+  init() {}
+  update() {}
+}
+
+/**
+ * クリア後のプレイヤー
+ * 煙を出しながら飛んでいく
+ */
+class ClearPlayer {
+  pos;
+  #drawerFactory;
+  constructor({pos, particleFrontLayer, drawerFactory}) {
+    this.pos = {x:pos.x, y:pos.y};
+    this.particleFrontLayer = particleFrontLayer;
+    this.#drawerFactory = drawerFactory;
+    const drawer = drawerFactory.create(this);
+    this.draw = () => drawer.draw(this);
+    
+  }
+  init() {}
+  update() {
+    this.pos.y += 2;
+    const particle = new Particle({drawer:this.#drawerFactory.create(Particle.name), initPos:{x:this.pos.x, y:this.pos.y - 8}, color:"#FFF"});
+    this.particleFrontLayer.add(particle);
+  }
+}
+
+class Ball {
+  pos;
+  hp = 15;
+  isDead = false;
+  constructor({initPos, isRightDirection, drawer}) {
+    this.pos = {x:initPos.x, y:initPos.y};
+    this.isRightDirection = isRightDirection;
+    this.draw = () => drawer.draw(this);
+  }
+  static create({initPos, isRightDirection, drawerFactory}) {
+    return new Ball({initPos, isRightDirection, drawer:drawerFactory.create(Ball)})
+  }
+  update() {
+    this.pos.x += this.isRightDirection ? 3 : -3;
+    this.hp--;
+    if(this.hp < 0) {
+      this.isDead = true;
+    }
+  }
+}
+
+window.Player = Player;
+window.ClearPlayer = ClearPlayer;
+window.Ball = Ball;
+window.DeadPlayer = DeadPlayer;
+
+
+
+class Title {
+  i = 0;
+  init() {}
+  update() {
+    this.i++;
+    if(mouse.press) {
+      this.isGoal = true;
+      this.isDead = true;
+    }
+  }
+  draw() {
+    const title = "CAT ADVENTURE"
+    screen.setLineWidth(5)
+    const y = 40;
+    screen.drawTextOutline(title,0,y,30,'black')
+    screen.drawText(title,0,y,30,'white')
+    screen.drawText("CLICK TO START",0,-30,20,'white')
+  }
+  destroy() {}
+}
+
+class StageTitle {
+  constructor({context}) {
+    this.context = context;
+  }
+  i = 0;
+  init() {}
+  update() {
+    
+    this.i++;
+    if(this.i > 200) {
+      this.isGoal = true;
+      this.isDead = true;
+    }
+  }
+  draw() {
+    const title = `STAGE ${this.context.stageCount + 1}`
+    screen.setLineWidth(5)
+    const y = 0;
+    screen.drawTextOutline(title,0,y,30,'black')
+    screen.drawText(title,0,y,30,'white')
+  }
+  destroy() {}
+}
+
+class Ending {
+  i = 0;
+  init() {}
+  update() {
+    this.i++;
+    if(this.i > 300) {
+      this.isGoal = true;
+      this.isDead = true;
+    }
+  }
+  draw() {
+    const title = "ENDING"
+    screen.setLineWidth(5)
+    const y = 40;
+    screen.drawTextOutline(title,0,y,30,'black')
+    screen.drawText(title,0,y,30,'white')
+    screen.drawText("congratulations",0,-30,20,'white')
+  }
+  destroy() {}
+}
+
+window.Title = Title;
+window.StageTitle = StageTitle;
+window.Ending = Ending;
+
+</script></html>
