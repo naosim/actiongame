@@ -986,10 +986,7 @@ function isPointInRect(pos, rect) {
 }
 
 class ScreenGamePad {
-  buttons = [];
-  arrowCenter;
-  arrowRadius = 32;
-  UP = false;
+    UP = false;
   DOWN = false;
   RIGHT = false;
   LEFT = false;
@@ -1010,100 +1007,249 @@ class ScreenGamePad {
     LEFT: false,
     A: false,
     B: false,
-  }
+  };
+  arrowKey;
+  buttons = [];
   init() {
     const marginBottom = 6;
     const marginLeft = 6;
-    const width = 36;
-    const height = 24;
-    // const width2 = height;
-    // const height2 = width;
-    const halfWidth = width / 2;
-    const halfHeight= height / 2;
-    // const halfWidth2 = width2 / 2;
-    // const halfHeight2= height2 / 2;
-    // const downY = -screen.height/2 + marginBottom + halfHeight2;
-    this.arrowCenter = {
-      x: -screen.width/2 + this.arrowRadius + marginLeft,
-      y: -screen.height/2 + this.arrowRadius + marginBottom,
+    const width = 42;
+    const height = 30;
+    
+    // 十字キーの中心位置
+    const arrowCenter = {
+      x: -screen.width/2 + ArrowKey.maxRadius + marginLeft,
+      y: -screen.height/2 + ArrowKey.maxRadius + marginBottom,
+    };
+    
+    // 十字キー生成
+    const arrowKey = this.arrowKey = new ArrowKey({arrowCenter}).init();
+    // ABボタン生成
+    const A = {x:screen.width/2-marginLeft-width/2, y:arrowCenter.y};
+    const B = {x:A.x - width, y:A.y}
+    Object.entries({A, B}).forEach(([key, value]) => {
+      const button = new Button({name:key, label:key, pos:value, width, height}).init();
+      this.buttons.push(button);
+    });
+    return this;
+  }
+  
+  update() {
+    this.arrowKey.update();
+    ["UP", "DOWN", "RIGHT", "LEFT"].forEach(key => {
+      this[key] = this.arrowKey[key];
+      this.press[key] = this.arrowKey.press[key];
+      this.release[key] = this.arrowKey.release[key];
+    })
+    
+    this.buttons.forEach(b => {
+      b.update();
+      this[b.name] = b.touching;
+      this.press[b.name] = b.press;
+      this.release[b.name] = b.release;
+    })
+  }
+
+  draw() {
+    this.arrowKey.draw();
+    this.buttons.forEach(b => b.draw())
+    
+    screen.setAlpha(1); // リセット
+  }
+}
+
+class Button {
+  touching = false;
+  press = false;
+  release = false;
+  constructor({name, label, pos, width, height}) {
+    this.name = name;
+    this.label = label;
+    this.pos = pos;
+    this.width = width;
+    this.height = height;
+    this.drawer = new ButtonDrawer();
+  }
+  init() { return this; }
+  update() {
+var current = false;
+    touch.touches.forEach(t => {
+      if(Button.isPointInRect(t, this)) {
+        current = true;
+      }
+    });
+    
+    this.press = !this.touching && current;
+    this.release = this.touching && !current;
+    this.touching = current;
+    
+  }
+  draw() {
+    if(this.drawer) {
+      this.drawer.draw(this);
+    }
+  }
+  static isPointInRect(pos, rect) {
+    const rectLeft = rect.pos.x - rect.width / 2;
+    const rectTop = rect.pos.y - rect.height / 2;
+    const rectRight = rect.pos.x + rect.width / 2;
+    const rectBottom = rect.pos.y + rect.height / 2;
+  
+    return pos.x >= rectLeft && pos.x <= rectRight &&
+           pos.y >= rectTop && pos.y <= rectBottom;
+  }
+}
+
+class ButtonDrawer {
+  draw(b) {
+    // 押されているボタン
+    if(b.touching) {
+      screen.setLineWidth(0)
+      screen.setAlpha(0.5)
+      screen.fillRect( b.pos.x, b.pos.y, b.width, b.height ,"#FFF");
     }
     
-    // const left  = {name:"LEFT" , pos:{x:-screen.width/2+marginLeft+halfWidth, y:downY+halfHeight2}, width, height};
-    // const right = {name:"RIGHT", pos:{x:left.pos.x + width, y:left.pos.y}, width, height};
-    // const down = {name:"DOWN"  , pos:{x:left.pos.x + halfWidth, y:downY}, width:width2, height:height2};
-    // const up = {name:"UP", pos:{x:down.pos.x, y:down.pos.y + height2}, width:width2, height:height2};
-    
-    const a = {name:"A", pos:{x:screen.width/2-marginLeft-halfWidth, y:this.arrowCenter.y}, width, height};
-    const b = {name:"B", pos:{x:a.pos.x - width, y:a.pos.y}, width, height};
-    
-    this.buttons = [/*left, right, down, up,*/ a, b];
-    
-
+    // ボタンの位置
+    screen.setLineWidth(2)
+    screen.setAlpha(0.8)
+    screen.drawTextOutline(b.name[0],b.pos.x,b.pos.y,30,'black')
+    screen.drawText(b.name[0],b.pos.x,b.pos.y,30,'white')
+    screen.drawRect( b.pos.x, b.pos.y, b.width, b.height ,"#FFF" )
   }
+}
+
+/**
+ * 十字キー
+ */
+class ArrowKey {
+  arrowCenter;
+  arrowRadius = 42;
+  arrowMinRadius = 4;
+  UP = false;
+  DOWN = false;
+  RIGHT = false;
+  LEFT = false;
+  press = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+  };
+  release = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false,
+  }
+  static maxRadius = 42;
+  static minRadius = 4;
+  constructor({arrowCenter}) {
+    this.arrowCenter = arrowCenter;
+    this.maxRadius = ArrowKey.maxRadius;
+    this.minRadius = ArrowKey.minRadius;
+    this.drawer = new ArrowKeyDrawer();
+  }
+  init() { return this; }
+  
   update() {
+    // 現在のボタンの状態
     var current = {
       UP: false,
       DOWN: false,
       RIGHT: false,
       LEFT: false,
-      A: false,
-      B: false,
-    };
+          };
+// 十字キーの状態
     const arrowTouches = touch.touches
-      .map(t => ({x:t.x - this.arrowCenter.x, y: t.y - this.arrowCenter.y}))
-      .map(t => ({x:t.x, y:t.y, distance:Math.sqrt(t.x*t.x + t.y*t.y)}))
-      .filter(t => t.distance <= this.arrowRadius);
+      .map(t => ArrowKey.diff(this.arrowCenter, t))
+      .map(t => ({...t, distance:ArrowKey.distance(t)}))
+      .filter(t => t.distance <= this.maxRadius && t.distance > this.minRadius);
     if(arrowTouches.length > 0) {
       const pos = arrowTouches[0];
       const rad = Math.atan2(pos.y, pos.x);
-      const unit = Math.PI / 8;
-      if(-unit * 3 <= rad && rad < unit * 3) {
-        current.RIGHT = true;
+      const unit = Math.PI / 8;// rad
+      if(unit * 1 <= rad && rad < unit * 7) {
+        current.UP = true;
       }
       if(-unit * 7 <= rad && rad < -unit * 1) {
         current.DOWN = true;
       }
-      if(unit * 1 <= rad && rad < unit * 7) {
-        current.UP = true;
+      if(-unit * 3 <= rad && rad < unit * 3) {
+        current.RIGHT = true;
       }
       if(rad <= -unit * 5 || unit * 5 < rad) {
         current.LEFT = true;
       }
     }
-    
-    touch.touches.forEach(t => {
-      this.buttons.forEach(b => {
-        if(isPointInRect(t, b)) {
-          current[b.name] = true;
-        }
-      })
-    });
-    ["UP", "DOWN", "LEFT", "RIGHT", "A", "B"].forEach(key => {
+    // 前の状態と比較して、releaseやpressを確定
+    ["UP", "DOWN", "RIGHT", "LEFT"].forEach(key => {
       this.release[key] = this[key] && !current[key];
       this.press[key] = !this[key] && current[key];
       this[key] = current[key];
     })
-    
-    
-    // printObj(this.press.LEFT);
-    // if(touch.touches.length > 0) {
+    }
+  
+  /**
+   * 差
+   * posB - posA
+   */
+  static diff(posA, posB) {
+    return {x: posB.x - posA.x, y: posB.y - posA.y}
   }
+  
+  static distance(t) {
+    return Math.sqrt(t.x*t.x + t.y*t.y)
+  }
+
   draw() {
-    screen.setLineWidth(2)
-    screen.drawArc(
-      this.arrowCenter.x, this.arrowCenter.y, 
-      this.arrowRadius, 0, Math.PI * 2, 0, "#FFF");
-    
-    this.buttons.forEach(b => {
-        
-        screen.drawTextOutline(b.name[0],b.pos.x,b.pos.y,30,'black')
-        screen.drawText(b.name[0],b.pos.x,b.pos.y,30,'white')
-        screen.drawRect( b.pos.x, b.pos.y, b.width, b.height ,"#FFF" )
-      })
-      
-    
+if(this.drawer) {
+      this.drawer.draw(this);
+    }
   }
 }
+
+class ArrowKeyDrawer {
+  draw(arrowKey) {
+    // 押されているキーを描画
+    screen.setLineWidth(0)
+    screen.setAlpha(0.5)
+    // 押されている十字キー
+    const unit = 22.5; // deg 45度の半分
+    if(arrowKey.RIGHT && arrowKey.DOWN) {
+      this.drawPressedArrow(arrowKey, -unit*3 , -unit);
+    }else if(arrowKey.RIGHT && arrowKey.UP) {
+      this.drawPressedArrow(arrowKey, unit*3 , unit);
+    }else if(arrowKey.LEFT && arrowKey.UP) {
+      this.drawPressedArrow(arrowKey, unit*5 , unit*7);
+    }else if(arrowKey.LEFT && arrowKey.DOWN) {
+      this.drawPressedArrow(arrowKey, -unit*5 , -unit*7);
+    }else if(arrowKey.UP) {
+      this.drawPressedArrow(arrowKey, unit*5, unit*3);
+    }else if(arrowKey.DOWN) {
+      this.drawPressedArrow(arrowKey, -unit*5, -unit*3);
+    }else if(arrowKey.RIGHT) {
+      this.drawPressedArrow(arrowKey, -unit, unit);
+    }else if(arrowKey.LEFT) {
+      this.drawPressedArrow(arrowKey, -unit*7, unit*7);
+    }
+    // キーの配置を描画
+    screen.setLineWidth(2)
+screen.setAlpha(0.8)
+    screen.drawArc(
+      arrowKey.arrowCenter.x, arrowKey.arrowCenter.y, 
+      arrowKey.maxRadius, 0, 360, 0, "#FFF");
+  }
+  
+  drawPressedArrow(arrowKey, startArc, endArc) {
+    screen.fillPolygon(
+      arrowKey.arrowCenter.x, arrowKey.arrowCenter.y,
+      Math.cos(startArc*Math.PI/180)*arrowKey.maxRadius + arrowKey.arrowCenter.x, Math.sin(startArc*Math.PI/180)*arrowKey.maxRadius + arrowKey.arrowCenter.y,
+      Math.cos(  endArc*Math.PI/180)*arrowKey.maxRadius + arrowKey.arrowCenter.x, Math.sin(  endArc*Math.PI/180)*arrowKey.maxRadius + arrowKey.arrowCenter.y,
+      "#FFF");
+  }
+}
+
+window.ScreenGamePad = ScreenGamePad;
 
 function parseSpriteValue(text) {
   const [name, p] = text.split(":");
