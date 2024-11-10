@@ -76,12 +76,12 @@ class CameraNone {
 //   pos = {x: 0, y: 0};
 //   constructor(target) {
 //     this.#target = target;
-  //   }
+//   }
 //   init() {}
 //   update() {
 //     this.pos.x = this.#target.pos.x;
 //     this.pos.y = this.#target.pos.y;
-  //   }
+//   }
 //   draw() {}
 // }
 
@@ -986,7 +986,7 @@ function isPointInRect(pos, rect) {
 }
 
 class ScreenGamePad {
-    UP = false;
+  UP = false;
   DOWN = false;
   RIGHT = false;
   LEFT = false;
@@ -1072,7 +1072,7 @@ class Button {
   }
   init() { return this; }
   update() {
-var current = false;
+    var current = false;
     touch.touches.forEach(t => {
       if(Button.isPointInRect(t, this)) {
         current = true;
@@ -1158,8 +1158,8 @@ class ArrowKey {
       DOWN: false,
       RIGHT: false,
       LEFT: false,
-          };
-// 十字キーの状態
+    };
+    // 十字キーの状態
     const arrowTouches = touch.touches
       .map(t => ArrowKey.diff(this.arrowCenter, t))
       .map(t => ({...t, distance:ArrowKey.distance(t)}))
@@ -1187,7 +1187,7 @@ class ArrowKey {
       this.press[key] = !this[key] && current[key];
       this[key] = current[key];
     })
-    }
+  }
   
   /**
    * 差
@@ -1202,7 +1202,7 @@ class ArrowKey {
   }
 
   draw() {
-if(this.drawer) {
+    if(this.drawer) {
       this.drawer.draw(this);
     }
   }
@@ -1234,7 +1234,7 @@ class ArrowKeyDrawer {
     }
     // キーの配置を描画
     screen.setLineWidth(2)
-screen.setAlpha(0.8)
+    screen.setAlpha(0.8)
     screen.drawArc(
       arrowKey.arrowCenter.x, arrowKey.arrowCenter.y, 
       arrowKey.maxRadius, 0, 360, 0, "#FFF");
@@ -1999,7 +1999,7 @@ class StageTitle {
     }
   }
   draw() {
-    const title = `STAGE ${this.context.stageCount + 1}`
+    const title = this.context.worldCount == 0 ? `STAGE ${this.context.stageCount + 1}` : `STAGE Lv${this.context.worldCount + 1}-${this.context.stageCount + 1}`
     screen.setLineWidth(5)
     const y = 0;
     screen.drawTextOutline(title,0,y,30,'black')
@@ -2010,7 +2010,9 @@ class StageTitle {
 
 class Ending {
   i = 0;
-  init() {}
+  init() {
+    audio.playSound("jingle_01");
+  }
   update() {
     this.i++;
     if(this.i > 300) {
